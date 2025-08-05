@@ -15,3 +15,7 @@ A simple Django-based Content Management System (CMS) project.
 ```bash
 git clone https://github.com/Miladkhoshdel/django-cms
 cd django-cms
+
+## 📦 Dependency Management with Poetry
+
+This project uses **Poetry** to manage dependencies and isolate virtual environments.
