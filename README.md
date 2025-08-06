@@ -15,6 +15,11 @@ A simple Django-based Content Management System (CMS) project.
 ```bash
 git clone https://github.com/Miladkhoshdel/django-cms
 cd django-cms
+```
+
+```bash
+python manage.py loaddata initial_settings
+```
 
 ## 📦 Dependency Management with Poetry
 

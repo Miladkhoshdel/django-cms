@@ -1,0 +1,52 @@
+[
+    {
+        "model": "core.websitesettings",
+        "pk": 1,
+        "fields": {
+            "key": "site_title",
+            "value": "Django CMS",
+            "created_at": "2025-08-05T00:00:00Z",
+            "updated_at": "2025-08-05T00:00:00Z"
+        }
+    },
+    {
+        "model": "core.websitesettings",
+        "pk": 2,
+        "fields": {
+            "key": "site_description",
+            "value": "Simple Django CMS",
+            "created_at": "2025-08-05T00:00:00Z",
+            "updated_at": "2025-08-05T00:00:00Z"
+        }
+    },
+    {
+        "model": "core.websitesettings",
+        "pk": 3,
+        "fields": {
+            "key": "site_keywords",
+            "value": "Django, CMS, Python",
+            "created_at": "2025-08-05T00:00:00Z",
+            "updated_at": "2025-08-05T00:00:00Z"
+        }
+    },
+    {
+        "model": "core.websitesettings",
+        "pk": 4,
+        "fields": {
+            "key": "site_author",
+            "value": "Your Name",
+            "created_at": "2025-08-05T00:00:00Z",
+            "updated_at": "2025-08-05T00:00:00Z"
+        }
+    },
+    {
+        "model": "core.websitesettings",
+        "pk": 5,
+        "fields": {
+            "key": "site_logo_path",
+            "value": "/static/images/logo.png",
+            "created_at": "2025-08-05T00:00:00Z",
+            "updated_at": "2025-08-05T00:00:00Z"
+        }
+    }
+]
