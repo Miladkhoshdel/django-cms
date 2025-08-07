@@ -1,17 +1,22 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from .models import WebsiteSettings
 from .serializers import WebsiteSettingsSerializer, WebsiteSettingsKeyValueSerializer
-
-# Create your views here.
 
 
 class WebsiteSettingsAPIView(APIView):
     """DRF API view to return website settings data"""
+
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         """Return all website settings as JSON"""
@@ -33,6 +38,9 @@ class WebsiteSettingsAPIView(APIView):
 
 class WebsiteSettingAPIView(APIView):
     """DRF API view to return a specific website setting by key"""
+
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, key, *args, **kwargs):
         """Return a specific website setting by key"""
