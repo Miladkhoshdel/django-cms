@@ -7,7 +7,7 @@ class WebsiteSettingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WebsiteSettings
-        fields = ["id", "key", "value"]
+        fields = ["key", "value"]
         read_only_fields = ["id"]
 
 
