@@ -6,7 +6,8 @@ A simple Django-based Content Management System (CMS) project.
 
 - Python 3.12
 - Django
-- [Poetry](https://python-poetry.org/) for dependency management
+- `venv` for virtual environment management
+- `pip` and `requirements.txt` for dependency management
 
 ## 🚀 Getting Started
 
@@ -17,17 +18,63 @@ git clone https://github.com/Miladkhoshdel/django-cms
 cd django-cms
 ```
 
-### 2. Load Initial Settings
+### 2. Create and activate a virtual environment
+
+On macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+On Windows:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. Run database migrations
+
+```bash
+python manage.py migrate
+```
+
+### 5. Load initial settings
 
 ```bash
 python manage.py loaddata initial_settings
 ```
+
+### 6. Create an admin user
+
+```bash
+python manage.py createsuperuser
+```
+
+### 7. Start the development server
+
+```bash
+python manage.py runserver
+```
+
+The app will be available at `http://127.0.0.1:8000/`.
+The admin panel is available at `http://127.0.0.1:8000/panel/`.
 
 ## 📚 API Endpoints
 
 ### 🔑 Token Authentication
 
 #### Obtain Token
+
+`POST http://127.0.0.1:8000/api/token/`
 
 Send a POST request to the token endpoint with your credentials:
 
@@ -48,6 +95,8 @@ Send a POST request to the token endpoint with your credentials:
 ```
 
 #### Verify Token
+
+`POST http://127.0.0.1:8000/api/token/verify/`
 
 Send a POST request to the verify endpoint with your token:
 
@@ -70,7 +119,7 @@ Send a POST request to the verify endpoint with your token:
 
 #### Get All Settings
 
-`GET http://127.0.0.1:8000/api/v1/core/settings`
+`GET http://127.0.0.1:8000/api/v1/core/settings/`
 
 **Sample Response:**
 
@@ -88,6 +137,8 @@ Send a POST request to the verify endpoint with your token:
 ```
 
 #### Get Single Setting
+
+`GET http://127.0.0.1:8000/api/v1/core/settings/<key>/`
 
 **Sample Response:**
 
