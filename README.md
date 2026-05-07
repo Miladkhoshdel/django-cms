@@ -7,7 +7,7 @@ A simple Django-based Content Management System (CMS) project.
 - Python 3.12
 - Django
 - `venv` for virtual environment management
-- `pip` and `requirements.txt` for dependency management
+- `pip` and `requirements/base.txt` for dependency management
 
 ## 🚀 Getting Started
 
@@ -38,7 +38,7 @@ python -m venv .venv
 
 ```bash
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements/base.txt
 ```
 
 ### 4. Run database migrations
