@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     # Apps
     "apps.core",
+    "apps.blog",
 ]
 
 MIDDLEWARE = [

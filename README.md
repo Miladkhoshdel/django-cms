@@ -151,3 +151,181 @@ Send a POST request to the verify endpoint with your token:
     }
 }
 ```
+
+### 📝 Blog Posts
+
+All blog endpoints require a JWT access token:
+
+```http
+Authorization: Bearer <access_token>
+```
+
+#### Create Blog Post
+
+`POST http://127.0.0.1:8000/api/v1/blog/posts/`
+
+**Sample Request:**
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/v1/blog/posts/ \
+  -H "Authorization: Bearer <access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "First weblog post",
+    "excerpt": "Short summary",
+    "content": "Full blog post content here.",
+    "status": "published"
+  }'
+```
+
+**Sample Response:**
+
+```json
+{
+    "id": 1,
+    "title": "First weblog post",
+    "slug": "first-weblog-post",
+    "excerpt": "Short summary",
+    "content": "Full blog post content here.",
+    "status": "published",
+    "published_at": "2026-05-07T14:55:00Z",
+    "author": "admin",
+    "created_at": "2026-05-07T14:55:00Z",
+    "updated_at": "2026-05-07T14:55:00Z"
+}
+```
+
+#### List Blog Posts
+
+`GET http://127.0.0.1:8000/api/v1/blog/posts/`
+
+**Sample Request:**
+
+```bash
+curl http://127.0.0.1:8000/api/v1/blog/posts/ \
+  -H "Authorization: Bearer <access_token>"
+```
+
+**Sample Response:**
+
+```json
+[
+    {
+        "id": 1,
+        "title": "First weblog post",
+        "slug": "first-weblog-post",
+        "excerpt": "Short summary",
+        "content": "Full blog post content here.",
+        "status": "published",
+        "published_at": "2026-05-07T14:55:00Z",
+        "author": "admin",
+        "created_at": "2026-05-07T14:55:00Z",
+        "updated_at": "2026-05-07T14:55:00Z"
+    }
+]
+```
+
+#### Filter Blog Posts By Status
+
+`GET http://127.0.0.1:8000/api/v1/blog/posts/?status=published`
+
+**Sample Request:**
+
+```bash
+curl "http://127.0.0.1:8000/api/v1/blog/posts/?status=published" \
+  -H "Authorization: Bearer <access_token>"
+```
+
+**Sample Response:**
+
+```json
+[
+    {
+        "id": 1,
+        "title": "First weblog post",
+        "slug": "first-weblog-post",
+        "excerpt": "Short summary",
+        "content": "Full blog post content here.",
+        "status": "published",
+        "published_at": "2026-05-07T14:55:00Z",
+        "author": "admin",
+        "created_at": "2026-05-07T14:55:00Z",
+        "updated_at": "2026-05-07T14:55:00Z"
+    }
+]
+```
+
+#### Get Single Blog Post
+
+`GET http://127.0.0.1:8000/api/v1/blog/posts/<slug>/`
+
+**Sample Request:**
+
+```bash
+curl http://127.0.0.1:8000/api/v1/blog/posts/first-weblog-post/ \
+  -H "Authorization: Bearer <access_token>"
+```
+
+**Sample Response:**
+
+```json
+{
+    "id": 1,
+    "title": "First weblog post",
+    "slug": "first-weblog-post",
+    "excerpt": "Short summary",
+    "content": "Full blog post content here.",
+    "status": "published",
+    "published_at": "2026-05-07T14:55:00Z",
+    "author": "admin",
+    "created_at": "2026-05-07T14:55:00Z",
+    "updated_at": "2026-05-07T14:55:00Z"
+}
+```
+
+#### Update Blog Post
+
+`PATCH http://127.0.0.1:8000/api/v1/blog/posts/<slug>/`
+
+**Sample Request:**
+
+```bash
+curl -X PATCH http://127.0.0.1:8000/api/v1/blog/posts/first-weblog-post/ \
+  -H "Authorization: Bearer <access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{"status":"draft"}'
+```
+
+**Sample Response:**
+
+```json
+{
+    "id": 1,
+    "title": "First weblog post",
+    "slug": "first-weblog-post",
+    "excerpt": "Short summary",
+    "content": "Full blog post content here.",
+    "status": "draft",
+    "published_at": "2026-05-07T14:55:00Z",
+    "author": "admin",
+    "created_at": "2026-05-07T14:55:00Z",
+    "updated_at": "2026-05-07T15:10:00Z"
+}
+```
+
+#### Delete Blog Post
+
+`DELETE http://127.0.0.1:8000/api/v1/blog/posts/<slug>/`
+
+**Sample Request:**
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/api/v1/blog/posts/first-weblog-post/ \
+  -H "Authorization: Bearer <access_token>"
+```
+
+**Sample Response:**
+
+```http
+HTTP/1.1 204 No Content
+```
