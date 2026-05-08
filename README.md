@@ -68,6 +68,20 @@ python manage.py runserver
 The app will be available at `http://127.0.0.1:8000/`.
 The admin panel is available at `http://127.0.0.1:8000/panel/`.
 
+## 🌐 Web Pages
+
+### Blog Posts
+
+Public blog pages render only published posts.
+
+#### List Published Posts
+
+`GET http://127.0.0.1:8000/posts/`
+
+#### View Single Published Post
+
+`GET http://127.0.0.1:8000/posts/<slug>/`
+
 ## 📚 API Endpoints
 
 ### 🔑 Token Authentication
@@ -152,9 +166,9 @@ Send a POST request to the verify endpoint with your token:
 }
 ```
 
-### 📝 Blog Posts
+### 📝 Blog Posts API
 
-All blog endpoints require a JWT access token:
+Blog API endpoints are available under `/api/v1/blog/` and require a JWT access token:
 
 ```http
 Authorization: Bearer <access_token>

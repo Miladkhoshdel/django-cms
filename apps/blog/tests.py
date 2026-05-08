@@ -16,7 +16,7 @@ class BlogPostAPITests(APITestCase):
 
     def test_create_blog_post(self):
         response = self.client.post(
-            reverse("blog:blog-post-list"),
+            reverse("blog_api:blog-post-list"),
             {
                 "title": "First Post",
                 "excerpt": "Short intro",
@@ -43,7 +43,7 @@ class BlogPostAPITests(APITestCase):
         )
 
         response = self.client.get(
-            reverse("blog:blog-post-list"),
+            reverse("blog_api:blog-post-list"),
             {"status": BlogPost.Status.PUBLISHED},
         )
 
@@ -55,11 +55,50 @@ class BlogPostAPITests(APITestCase):
         post = BlogPost.objects.create(
             title="Readable URLs",
             content="Use slugs for weblog URLs",
+            status=BlogPost.Status.PUBLISHED,
         )
 
         response = self.client.get(
-            reverse("blog:blog-post-detail", kwargs={"slug": post.slug})
+            reverse("blog_api:blog-post-detail", kwargs={"slug": post.slug})
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["title"], "Readable URLs")
+
+    def test_post_list_page_shows_only_published_posts(self):
+        BlogPost.objects.create(
+            title="Published Page Post",
+            content="Visible content",
+            status=BlogPost.Status.PUBLISHED,
+        )
+        BlogPost.objects.create(title="Draft Page Post", content="Hidden content")
+
+        response = self.client.get(reverse("blog:post_list"))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, "Published Page Post")
+        self.assertNotContains(response, "Draft Page Post")
+
+    def test_post_detail_page_renders_published_post(self):
+        post = BlogPost.objects.create(
+            title="Template Detail Post",
+            content="Rendered content",
+            status=BlogPost.Status.PUBLISHED,
+        )
+
+        response = self.client.get(
+            reverse("blog:post_detail", kwargs={"slug": post.slug})
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, "Template Detail Post")
+        self.assertContains(response, "Rendered content")
+
+    def test_post_detail_page_hides_draft_post(self):
+        post = BlogPost.objects.create(title="Draft Detail Post", content="Hidden")
+
+        response = self.client.get(
+            reverse("blog:post_detail", kwargs={"slug": post.slug})
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
