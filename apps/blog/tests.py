@@ -34,6 +34,27 @@ class BlogPostAPITests(APITestCase):
         self.assertEqual(post.slug, "first-post")
         self.assertIsNotNone(post.published_at)
 
+    def test_create_blog_post_rejects_duplicate_explicit_slug(self):
+        BlogPost.objects.create(
+            title="Existing Post",
+            slug="shared-slug",
+            content="Existing content",
+        )
+
+        response = self.client.post(
+            reverse("blog_api:blog-post-list"),
+            {
+                "title": "New Post",
+                "slug": "shared-slug",
+                "content": "New content",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("slug", response.data)
+        self.assertEqual(BlogPost.objects.count(), 1)
+
     def test_filter_blog_posts_by_status(self):
         BlogPost.objects.create(title="Draft Post", content="Draft content")
         BlogPost.objects.create(
